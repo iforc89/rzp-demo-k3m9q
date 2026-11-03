@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>リゾペール 営業支援サイト（デモ）</title>
+<style>
+:root{
+  --navy:#16324a; --teal:#1f7a8c; --teal-d:#14606f; --bg:#f6f8f9; --line:#dde5e9;
+  --ink:#1d2b33; --sub:#5c7080; --accent:#e8873a; --card:#fff; --warn:#b8641f;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{overflow-x:hidden}
+body{margin:0;font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center;margin:6px 0 14px}
+.figrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 16px}
+.fig{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.fig img{display:block;width:100%;height:250px;object-fit:cover}
+.fig figcaption{font-size:11.5px;color:var(--sub);padding:7px 11px;margin:0;line-height:1.55}
+.figwide{margin:0 0 16px}
+.figwide img{height:300px}
+.fig.r16 img{height:auto;aspect-ratio:16/9;object-fit:cover}
+.notice{background:#3a4a55;color:#dfe8ee;font-size:12px;padding:8px 0;text-align:center;letter-spacing:.02em}
+header.hero{position:relative;background:#16324a;color:#fff}
+.hero-bg{position:absolute;inset:0;background:url(assets/hero_clinic.png) center 42%/cover no-repeat}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(11,30,45,.94) 0%,rgba(11,30,45,.86) 34%,rgba(13,40,56,.55) 62%,rgba(13,40,56,.12) 100%)}
+.hero-inner{position:relative;z-index:2;padding-top:52px;padding-bottom:54px}
+.bleed{width:100vw;margin-left:calc(50% - 50vw);overflow:hidden;background:#e9eef1}
+.bleed img{display:block;width:100%;height:340px;object-fit:cover}
+.bleed.tall img{height:400px}
+.bleed.s1 img{height:430px;object-position:50% 38%}
+.cap{font-size:11.5px;color:var(--sub);margin:8px 0 16px}
+.brand{font-size:12px;letter-spacing:.2em;opacity:.85}
+h1{font-size:30px;margin:10px 0 10px;line-height:1.4;font-weight:800;letter-spacing:.01em;text-shadow:0 2px 12px rgba(0,0,0,.28)}
+.lead{font-size:14.5px;opacity:.96;margin:0}
+.hero-copy{max-width:600px}
+.lead2{font-size:12.5px;opacity:.85;margin:8px 0 0}
+.steps{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.step{flex:1;min-width:150px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:10px 12px}
+.step b{display:block;font-size:10.5px;letter-spacing:.14em;opacity:.8}
+.step span{font-size:13px;font-weight:700}
+.mainbtn{display:block;margin:20px 0 0;background:var(--accent);color:#fff;text-decoration:none;border-radius:12px;padding:14px 20px;box-shadow:0 6px 16px rgba(232,135,58,.3)}
+.mainbtn .t{font-size:17px;font-weight:800;display:block}
+.mainbtn .s{font-size:12px;opacity:.95}
+nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+nav .wrap{display:flex;gap:4px;overflow-x:auto;padding:8px 20px}
+nav a{flex:0 0 auto;font-size:12.5px;color:var(--navy);text-decoration:none;padding:5px 10px;border-radius:99px;white-space:nowrap}
+nav a:hover{background:#eef3f5}
+section{padding:32px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:none}
+.sec-no{display:inline-block;background:var(--teal);color:#fff;font-size:10.5px;letter-spacing:.12em;padding:3px 9px;border-radius:99px;font-weight:700}
+h2{font-size:20px;margin:10px 0 6px;font-weight:800;line-height:1.5}
+h3{font-size:15px;margin:0 0 4px}
+.desc{color:var(--sub);font-size:13.5px;margin:0 0 16px}
+p{margin:0 0 10px;font-size:13.5px}
+ul{margin:0 0 12px;padding-left:20px;font-size:13.5px}
+li{margin-bottom:6px}
+.card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:8px;padding:14px 16px;margin-bottom:10px}
+.grid{display:grid;gap:10px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:1fr 1fr}
+.talk{background:#f2f8f9;border:1px dashed var(--teal);border-radius:10px;padding:12px 15px;font-size:13px}
+.talk p{margin:0 0 8px;font-size:13px}
+.talk p:last-child{margin-bottom:0}
+.who{display:inline-block;min-width:74px;color:var(--teal-d);font-weight:700;font-size:12px}
+.chiprow{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.chip{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;cursor:pointer;font-family:inherit}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.chip.small{font-size:11px;padding:4px 10px}
+.filterbox{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.flabel{font-size:11px;letter-spacing:.1em;color:var(--sub);font-weight:700;margin:0 0 6px}
+.hit{font-size:12.5px;color:var(--sub);margin:0 0 10px}
+.hit b{color:var(--accent);font-size:15px}
+.item,.ecard,.case{background:#fff;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:8px;padding:14px 16px;margin-bottom:10px}
+.ecard{border-left-color:var(--navy)}
+.case{border-left-color:var(--accent)}
+.item-h{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.kind{font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:4px;background:#eef3f5;color:var(--teal-d)}
+.kind-s{background:#e7ecf3;color:var(--navy)}
+.kind.type-p{background:#e9f4f6;color:var(--teal-d)}
+.kind.type-c{background:#fdf0e4;color:var(--warn)}
+.kind.type-v{background:#eef0f7;color:#3d4a7a}
+.kind.type-b{background:#f0f0f2;color:#5c7080}
+.item-id{font-size:11px;color:var(--sub);font-weight:700}
+.draft-tag{color:var(--warn)}
+.pair{display:grid;grid-template-columns:130px 1fr;gap:2px 10px;margin:6px 0 10px;font-size:12.5px}
+.pair dt{color:var(--sub);font-size:12px}
+.pair dd{margin:0}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.tag{font-size:11px;background:#eef3f5;color:var(--teal-d);padding:3px 9px;border-radius:99px;white-space:nowrap;font-weight:700}
+.tag.scene{background:#fff;border:1px solid var(--line);color:var(--sub);font-weight:400}
+.tag.rel{background:#fff;border:1px solid var(--line);color:var(--navy);font-weight:400}
+.evlink{margin-top:10px;font-size:12.5px;font-weight:700;color:var(--teal-d);background:#eef6f7;border:1px solid #bfdde2;border-radius:8px;padding:8px 12px;cursor:pointer;font-family:inherit}
+.evlink.ghost{color:var(--sub);background:#fff;border-color:var(--line);font-weight:400}
+.src{font-size:11.5px;color:var(--sub);margin:0 0 8px}
+.finding{background:#f7fafb;border-radius:6px;padding:10px 12px;font-size:12.5px;margin:8px 0}
+.finding b{display:block;color:var(--teal-d);font-size:11px;letter-spacing:.06em;margin-bottom:2px}
+.ecard.draft{border-left-color:#c8d2d8;background:#fbfcfc;opacity:.9}
+.empty{background:#fff;border:1px dashed var(--line);border-radius:8px;padding:18px;text-align:center;color:var(--sub);font-size:13px}
+.draftbox{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--sub);margin:0 0 12px}
+.focusbar{background:#fdf0e4;border:1px solid #f0d3b4;color:var(--warn);border-radius:8px;padding:10px 12px;font-size:12.5px;margin-bottom:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.focusbar button{font-family:inherit;font-size:12px;border:1px solid #e0bd97;background:#fff;color:var(--warn);border-radius:99px;padding:4px 12px;cursor:pointer}
+.case-no{font-size:10.5px;letter-spacing:.14em;font-weight:800;color:var(--accent);margin-bottom:4px}
+.point{font-size:12.5px;color:var(--sub);margin:10px 0 0}
+.point b{color:var(--warn);margin-right:6px;font-size:11px;letter-spacing:.06em}
+.voice{font-size:12.5px;color:#3d4a55;background:#f7fafb;border-left:2px solid #bfdde2;padding:8px 10px;margin:6px 0 0;border-radius:0 6px 6px 0}
+.note-inline{color:var(--warn);font-size:11px}
+.faq-group{margin-bottom:18px}
+.faq-group h3{font-size:14px;margin:0 0 8px;color:var(--navy)}
+.faq{background:#fff;border:1px solid var(--line);border-radius:8px;margin-bottom:7px;overflow:hidden}
+.faq summary{font-size:13.5px;font-weight:700;padding:12px 16px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"＋";color:var(--teal)}
+.faq[open] summary::after{content:"－"}
+.faq .ans{padding:0 16px 14px;font-size:13px;color:#33424c;border-top:1px dashed var(--line);padding-top:12px}
+.dl{display:flex;gap:10px;flex-wrap:wrap}
+.stepslist{margin:0;padding-left:20px;font-size:13px}.stepslist li{margin-bottom:6px}
+.productshot{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;margin:0 0 4px}
+.productshot img{height:460px;width:auto;max-width:100%;display:inline-block}
+.dlgroup{margin:0 0 18px}
+.dlgroup .flabel{margin:0 0 8px}
+.dlrow{display:flex;align-items:center;justify-content:space-between;gap:14px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:8px;padding:12px 14px;margin-bottom:8px}
+.dlrow.draft{border-left-color:#c8d2d8;background:#fbfcfc}
+.dltxt{min-width:0}
+.dltxt b{display:block;font-size:13px;line-height:1.55}
+.dltxt span{display:block;font-size:11.5px;color:var(--sub);margin-top:2px}
+.dlgo{flex:0 0 auto;font-size:12px;font-weight:700;color:var(--teal-d);background:#eef6f7;border:1px solid #bfdde2;border-radius:8px;padding:8px 12px;text-decoration:none;white-space:nowrap}
+.dlgo .sz{display:block;font-size:10px;font-weight:400;color:var(--sub);text-align:center;margin-top:1px}
+.dlgo.off{background:#f4f6f7;border-color:var(--line);color:var(--sub);font-weight:400;font-size:11.5px}
+.evlink.off{color:var(--sub);background:#f7f9fa;border-color:var(--line);font-weight:400;display:inline-block}
+@media(max-width:720px){.dlrow{flex-direction:column;align-items:stretch;gap:8px}.dlgo{text-align:center}}
+.dlbtn{background:#fff;border:1px solid var(--line);border-radius:8px;padding:11px 15px;font-size:12.5px;font-weight:700;flex:1;min-width:190px}
+.dlbtn small{display:block;color:var(--sub);font-weight:400;font-size:11px}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin:4px 0 14px;background:#fff}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#eef4f6;font-size:12px;color:var(--navy)}
+.foot{background:#eef3f5;border-radius:10px;padding:14px 16px;font-size:12.5px;color:var(--teal-d)}
+footer{padding:22px 0 44px;font-size:11.5px;color:var(--sub);text-align:center}
+@media(max-width:720px){
+  h1{font-size:24px;line-height:1.45}
+  .lead{font-size:13.5px}
+  .g3,.g2{grid-template-columns:1fr}
+  .pair{grid-template-columns:1fr;gap:0}
+  .pair dt{margin-top:6px}
+  .split,.figrow{grid-template-columns:1fr}
+  .fig img{height:210px}
+  .figwide img{height:230px}
+  .bleed img,.bleed.tall img{height:240px}
+  .bleed.s1 img{height:280px;object-position:72% 34%}
+  .hero-bg{position:relative;height:250px}
+  .hero-bg::after{background:linear-gradient(180deg,rgba(11,30,45,0) 35%,rgba(11,30,45,.5) 72%,#16324a 100%)}
+  .hero-inner{padding-top:18px;padding-bottom:26px}
+  .productshot img{height:320px}
+  .hero-copy{max-width:none}
+}
+</style>
+</head>
+<body>
+<div class="notice">本ページは営業担当者向けの社内資料です。外部への転載・共有はご遠慮ください。（デモ版）</div>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap hero-inner"><div class="hero-copy">
+        <div class="brand">LYZOPIEL ／ 和興フィルタテクノロジー株式会社</div>
+        <h1>治療のその先へ。日々の皮膚管理という選択肢を。</h1>
+        <p class="lead">皮膚トラブルを抱える動物たちのケアに、日常的な皮膚管理の視点を。</p>
+        <p class="lead2">リゾペールは、動物の皮膚ケアに新たな選択肢を提案する製品です。日々のケアや継続的な管理を考える動物病院に向けて、皮膚管理の可能性をご紹介します。</p>
+        <div class="steps">
+          <div class="step"><b>STEP 1</b><span>製品を知る</span></div>
+          <div class="step"><b>STEP 2</b><span>提案できる場面を知る</span></div>
+          <div class="step"><b>STEP 3</b><span>根拠を確認する</span></div>
+        </div>
+        <a class="mainbtn" href="#s6">
+          <span class="t">どんな子に提案できるか を調べる</span>
+          <span class="s">治療対象・症状・診療テーマから絞り込めます</span>
+        </a>
+  </div></div>
+</header>
+
+<nav><div class="wrap">
+  <a href="#s1">皮膚管理という考え方</a>
+  <a href="#s2">リゾペールとは</a>
+  <a href="#s3">特徴・技術的背景</a>
+  <a href="#s4">提案する意義</a>
+  <a href="#s6">活用ガイド</a>
+  <a href="#s7">エビデンス</a>
+  <a href="#s8">営業会話例</a>
+  <a href="#s9">よくある質問</a>
+  <a href="#dl">関連資料</a>
+</div></nav>
+
+<!-- ============ 皮膚管理という考え方 ============ -->
+<section id="s1">
+  <div class="wrap">
+    <span class="sec-no">SECTION 1</span>
+    <h2>皮膚の悩みは、診察室の中だけで完結しない。</h2>
+    <p class="desc">動物病院が抱える皮膚管理の課題</p>
+    <p>動物の皮膚トラブルに向き合ううえでは、診察時の状態だけでなく、その後の日常生活におけるケアも重要な検討事項となります。</p>
+    <p>皮膚の状態や症状の現れ方、飼育環境、動物の性格、飼い主様が実施できるケアは一頭一頭異なります。そのため、皮膚管理を考える際には、症状への対応に加えて、日常のケアをどのように継続していくかという視点も求められます。</p>
+    <div class="bleed s1"><img src="assets/s1_home_care.png" alt="自宅で飼い主がリゾペールを犬の背中にスプレーしている場面"></div>
+    <p class="cap">診察のあと、飼い主様が自宅で続けられるケアまで見据えて提案します。</p>
+    <div class="card"><h3>だからこそ、皮膚の状態だけでなく、日常のケアまで見据えた選択肢が必要です。</h3>
+      <p>リゾペールは、こうした皮膚管理の課題を考える際に、製品の特性や使用目的を踏まえて検討いただくための選択肢です。</p></div>
+    <p class="desc" style="margin:0">皮膚トラブルへの対応だけでなく、その後のケアまで考える。動物の皮膚の状態や生活環境、飼い主様が継続できるケア方法は、それぞれ異なります。リゾペールを、診療後の日常的な皮膚管理を考える際の選択肢としてご検討ください。</p>
+  </div>
+</section>
+
+<!-- ============ リゾペールとは ============ -->
+<section id="s2">
+  <div class="wrap">
+    <span class="sec-no">SECTION 2</span>
+    <h2>皮膚管理の新たな選択肢、リゾペール。</h2>
+    <p class="desc">製品の基本情報と、紹介するときの3つの視点</p>
+    <p>リゾペールは、機能性素材<b>LYZOX®（リゾックス）</b>を配合した、動物病院専用品のペット用スキンケアスプレーです。日本製。</p>
+    <div class="productshot"><img src="assets/product.jpg" alt="リゾペール スキンケアスプレー 100mL"></div>
+    <p class="cap" style="text-align:center">リゾペール スキンケアスプレー 100mL（動物病院専用品）</p>
+
+    <div class="grid g3">
+      <div class="card"><h3>安 全</h3><p>第三者機関で実施した各種安全性試験に合格しています。</p></div>
+      <div class="card"><h3>清 潔</h3><p>機能性素材LYZOX®が、お肌の環境にアプローチします。</p></div>
+      <div class="card"><h3>保 湿</h3><p>お肌に潤いを与えるヒアルロン酸を配合しています。</p></div>
+    </div>
+
+    <div class="split" style="margin-top:16px">
+      <div>
+        <h3>配合成分</h3>
+        <p>水、グリセリン、BG、LYZOX®（卵白、キトサン）、カプリン酸、ヒアルロン酸Na、水溶性コラーゲン　他</p>
+        <p class="desc" style="font-size:12px;margin:0">※卵白＝安定化リゾチーム／特許出願中・MADE IN JAPAN</p>
+        <h3 style="margin-top:14px">使用できる部位</h3>
+        <p>耳周り／目周り／口周り／鼻周り／肉球／デリケートゾーン周囲／全身の清潔・保湿</p>
+      </div>
+      <div>
+        <h3>使用方法</h3>
+        <ol class="stepslist">
+          <li>「UnLockボタン」を押し込み、ストッパーを解除します</li>
+          <li>本品を振ってから、ご使用したい部位に2〜3pushスプレーします</li>
+          <li>スプレー後、手でなじませます。お顔周りはコットンやガーゼにつけて使用します</li>
+          <li>ミストが直接皮膚にかかるようにスプレーします（1日2回を目安）</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="foot" style="margin-top:6px">
+      <b>使用上の注意</b><br>
+      ・本品の使用により何らかの異常に気付いた場合は、使用を中止し、獣医師にご相談ください<br>
+      ・乳幼児の手の届く場所、高温または低温での保存は避けてください<br>
+      ・目に入らないようご注意ください。入った場合はこすらずにすぐ洗い流してください<br>
+      ・耳内には使用しないでください
+    </div>
+  </div>
+</section>
+
+<!-- ============ 特徴・技術的背景 ============ -->
+<section id="s3">
+  <div class="wrap">
+    <span class="sec-no">SECTION 3</span>
+    <h2>製品の特性を理解し、皮膚管理の提案につなげる。</h2>
+    <p class="desc">特徴・技術的背景</p>
+    <p>LYZOX®（リゾックス）は、リゾチームに食物繊維をハイブリッドした新素材で、帝京大学医真菌研究センター、東京科学大学（旧東京医科歯科大学）呼吸器内科との共同研究による機能性素材です。資料では、アレルギー性・刺激性がなく、従来のリゾチームと比べて抗菌・抗真菌・抗炎症の各作用に優れるとされています。</p>
+
+    <div class="grid g3">
+      <div class="card"><h3>① 抗炎症作用</h3><p>好中球の粘着抑制が確認されています。</p></div>
+      <div class="card"><h3>② 抗真菌性</h3><p>マラセチアの増殖抑制、カンジダの菌糸形発育抑制が確認されています。</p></div>
+      <div class="card"><h3>③ 抗菌性</h3><p>緑膿菌・MRSA等に対する増殖抑制が確認されています。</p></div>
+      <div class="card"><h3>④ 消臭性</h3><p>不快なにおいを抑える効果が期待されています。</p></div>
+      <div class="card"><h3>⑤ 安全性</h3><p>各種試験で安全性を確認しています。</p></div>
+      <div class="card"><h3>研究の土台</h3><p>論文3報・特許2件（日本・米国・中国）に裏づけられています。<a href="#s7" style="color:var(--teal-d)">Section7で確認する</a></p></div>
+    </div>
+
+    <figure class="fig figwide r16" style="margin-top:16px"><img src="assets/graph_antifungal.png" alt="LYZOXによるマラセチアの発育抑制（発育率）"><figcaption>LYZOX添加群では濃度依存的に発育率が低下（500μg/mlで3.16%）。ご提供のグラフデータから作成しました。</figcaption></figure>
+    <div class="bleed" style="margin-top:16px"><img src="assets/s3_lab.png" alt="研究・試験のイメージ"></div>
+    <p class="cap">試験管内で確認された作用と、実際の動物での使用結果は区別して説明します（写真はイメージ）。</p>
+
+    <div class="split">
+      <div>
+        <h3>確認されている作用（試験管内）</h3>
+        <ul>
+          <li>マラセチアに対する増殖抑制</li>
+          <li>カンジダに対する菌糸形発育の抑制（濃度依存的）</li>
+          <li>緑膿菌・メチシリン耐性黄色ブドウ球菌（MRSA）に対する増殖抑制</li>
+          <li>好中球の粘着抑制（抗炎症作用の指標）</li>
+        </ul>
+      </div>
+      <div>
+        <h3>安全性（11種類の試験）</h3>
+        <ul>
+          <li>急性経口毒性：LD50 5,000mg/kg以上</li>
+          <li>皮膚一次刺激性・眼刺激性・連続皮膚刺激性・口腔粘膜刺激性：いずれも無刺激性</li>
+          <li>光毒性・光感作性・復帰突然変異：陰性</li>
+          <li>ヒトパッチ試験・吸入毒性試験も実施</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot" style="margin-top:6px">
+      これらは貴社の「獣医師向け製品説明資料」に基づく記載です。試験管内（in vitro）で確認された作用であり、動物の疾患に対する臨床効果を示すものではありません。LPにどこまで掲載するかは、表現の範囲を含めてご確認ください。
+    </div>
+  </div>
+</section>
+
+<!-- ============ 提案する意義 ============ -->
+<section id="s4">
+  <div class="wrap">
+    <span class="sec-no">SECTION 4</span>
+    <h2>動物病院の課題を起点に、皮膚管理の提案を。</h2>
+    <p class="desc">リゾペールを提案する意義と、紹介時のトーク例</p>
+    <p>リゾペールを動物病院に紹介する際は、製品の特徴を一方的に説明するのではなく、まず皮膚管理に関する課題や、日常のケアで困っていることを聞き取ることが重要です。動物病院によって、皮膚管理に対する考え方や、日常的なケアの提案方法は異なります。</p>
+    <div class="talk">
+      <p><span class="who">導入</span>「先生の病院では、皮膚トラブルのある動物について、診察時の対応だけでなく、日常的なケアについてもご相談を受けることはありますか？」</p>
+      <p><span class="who">聞き取り</span>「特に、日常のケアを継続するうえで難しさを感じる場面や、飼い主様への説明で工夫されていることはありますか？」</p>
+      <p><span class="who">つなぎ</span>「そうした皮膚管理の観点から、リゾペールについてご紹介させてください。製品の特徴や使用方法をご確認いただき、先生の病院での活用可能性をご検討いただければと思います。」</p>
+    </div>
+    <p style="margin-top:12px">製品の説明から始めるのではなく、動物病院の課題から考える。それが、リゾペールの特徴を適切に伝え、具体的な活用場面の検討につなげるための基本です。</p>
+  </div>
+</section>
+
+<!-- ============ Section6 活用ガイド ============ -->
+<section id="s6">
+  <div class="wrap">
+    <span class="sec-no">SECTION 6 ／ MAIN</span>
+    <h2>どんな子にリゾペールを提案できるのか</h2>
+    <p class="desc">治療対象から探すリゾペール活用ガイド</p>
+    <p>皮膚トラブルを繰り返す子、シャンプーによるケアが難しい子、顔周りや指間など部分的なケアが必要な子。動物病院では、疾患そのものへの対応に加えて、日常的な皮膚管理が課題となる場面があります。</p>
+    <p>リゾペールは、LYZOXを配合したスプレータイプの製品です。診療方針や動物の状態に応じて、継続的な皮膚管理や局所的なケアを検討する際の選択肢としてご紹介いただけます。先生が診ているのは、どのような子でしょうか。</p>
+
+    <div class="figrow">
+      <figure class="fig"><img src="assets/s6_cat_chin.png" alt="猫の顎周辺をやさしくケアしている場面"><figcaption>猫の顎周辺のケア。使用可否は製品の正式な使用方法を確認します。</figcaption></figure>
+      <figure class="fig"><img src="assets/s6_paw.png" alt="犬の肉球をケアしている場面"><figcaption>肉球の乾燥・ひび割れなど、部分的なケアの場面。</figcaption></figure>
+    </div>
+
+    <div class="filterbox">
+      <p class="flabel">入口（場面から探す）</p>
+      <div class="chiprow" id="s6-entries"></div>
+      <p class="flabel">種類</p>
+      <div class="chiprow" id="s6-kinds"></div>
+      <p class="flabel">症状タグ</p>
+      <div class="chiprow" id="s6-tags" style="margin-bottom:0"></div>
+    </div>
+
+    <p class="hit">該当する項目 <b id="s6-count">0</b> 件</p>
+    <div id="s6-list"></div>
+
+    <div class="foot" style="margin-top:14px">この一覧は、営業担当者が提案機会を見つけるための候補です。ここに挙げたすべての疾患に対する有効性が確認されていることを意味しません。疾患別の効果を訴求する場合は、該当する研究・症例・製品資料による裏付けが必要です。</div>
+    <p class="desc" style="margin:12px 0 0;font-size:12px">項目はスプレッドシートに1行追加すると、入口・タグ・カードが自動で増えます（画面の作り直しは不要）。</p>
+
+    <div class="card" style="margin-top:16px"><h3>皮膚管理の課題に気付くことが、提案の第一歩です。</h3>
+      <p>皮膚トラブルを繰り返している／シャンプーによるケアが難しい／特定の部位に継続的なケアが必要／自宅でのケア方法を検討している。このような場面に出会ったら、リゾペールを思い出してください。</p></div>
+  </div>
+</section>
+
+<!-- ============ Section7 エビデンス ============ -->
+<section id="s7">
+  <div class="wrap">
+    <span class="sec-no">SECTION 7</span>
+    <h2>リゾペールのエビデンス</h2>
+    <p class="desc">研究・論文・症例を確認する</p>
+    <p>製品を提案するうえで重要なのは、特徴を知るだけでなく、その根拠を理解することです。本セクションでは、LYZOXの研究データや臨床報告、症例情報を整理し、リゾペールを理解するための参考情報として紹介します。</p>
+    <p>研究で確認された作用、実際の症例で観察された変化、製品として確認されている特徴は、それぞれ意味が異なります。何を対象に、どのような方法で検討し、何が確認されたのか。その違いを理解したうえで、先生への製品紹介に活用してください。</p>
+
+    <div class="filterbox">
+      <p class="flabel">種別で絞り込む</p>
+      <div class="chiprow" id="s7-types" style="margin-bottom:10px"></div>
+      <label class="draftbox" style="margin:0"><input type="checkbox" id="draft-toggle"> 下書き（掲載前確認中）も表示する</label>
+    </div>
+    <div id="s7-focus"></div>
+    <div id="s7-list"></div>
+
+    <h3 style="margin-top:20px">エビデンスを確認する際のポイント</h3>
+    <table>
+      <tr><th style="width:28%">情報の種類</th><th>分かること</th><th>それだけでは断定できないこと</th></tr>
+      <tr><td>基礎研究</td><td>特定条件下での作用</td><td>動物の疾患に対する臨床効果</td></tr>
+      <tr><td>臨床試験</td><td>対象・条件下での評価結果</td><td>すべての症例における効果</td></tr>
+      <tr><td>症例報告</td><td>個別症例の経過</td><td>一般的な有効性や再現性</td></tr>
+      <tr><td>製品仕様</td><td>成分・形状・使用方法</td><td>疾患の治療効果</td></tr>
+    </table>
+    <p class="desc" style="margin:0">各研究の原著・症例資料へのリンクを設置し、営業担当者が必要に応じて詳細を確認できる構成にします。</p>
+  </div>
+</section>
+
+<!-- ============ Section8 営業会話例 ============ -->
+<section id="s8">
+  <div class="wrap">
+    <span class="sec-no">SECTION 8</span>
+    <h2>診療上の課題を聞き、リゾペールの提案につなげる</h2>
+    <p class="desc">営業シナリオ・会話例</p>
+    <p>商品を紹介する前に、先生の診療上の課題を聞いてみましょう。シャンプーの継続が難しいケース、局所的なケアが必要なケース、日常的な皮膚管理を検討しているケースなど、先生の話を聞いたうえで、該当する活用場面があればリゾペールをご紹介ください。</p>
+    <div class="bleed"><img src="assets/s8_conversation.png" alt="動物病院の受付で獣医師と話す場面"></div>
+    <p class="cap">まず課題を聞き、製品の説明から入らない。</p>
+    <div id="s8-list"></div>
+    <div class="card" style="margin-top:14px"><h3>製品紹介から次のアクションにつなげる</h3>
+      <div class="talk" style="margin-top:8px">
+        <p><span class="who">導入</span>「先生、今日は皮膚管理の選択肢として、リゾペールという製品をご紹介させてください。LYZOXを配合したスプレータイプの製品で、製品の特徴や研究・症例資料もご確認いただけます。」</p>
+        <p><span class="who">製品紹介</span>「リゾペールは、継続的な皮膚管理や局所的なケアを検討する際の選択肢としてご紹介している製品です。具体的な使用場面については、先生の診療方針や対象となる動物の状態に応じてご検討いただけます。」</p>
+        <p><span class="who">根拠を求められたら</span>「関連する研究データや症例資料をご用意しています。対象や試験条件、結果を確認いただけるよう、資料をご案内します。」</p>
+        <p><span class="who">クロージング</span>「先生の診療で活用を検討できそうなケースがあれば、まずは製品資料と使用方法をご確認いただければと思います。ご不明な点があれば、追加資料もご案内します。」</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:24px">現場でいただいた声</h3>
+    <p class="desc">以下は、販売代理店の営業担当者から現場でいただいた声です。個々の症例・条件は異なるため、効果を保証するものではありません。</p>
+
+    <div class="grid g2">
+      <div class="card"><h3>① 赤み・痒み・皮膚炎の初期対応と維持</h3>
+        <p>お腹、指先、耳周りの赤みや痒みへの第一選択として。</p>
+        <p class="voice">「1日2回の塗布で、早ければ2〜3日で改善が見られます。アポキル（内服薬）で反応が鈍い症例や、ステロイドの長期使用を避けたい症例での併用・切り替えが目立ちます」</p></div>
+      <div class="card"><h3>② マラセチア性皮膚炎のコントロール</h3>
+        <p>マラセチア菌の抑制として。</p>
+        <p class="voice">「マラセブシャンプーの合間のケアや、抗真菌薬（イトラコナゾール等）との併用で効果を発揮します。ベタつかないため、脂っぽさを嫌うオーナーに好評です。リゾペールのみで維持できている例もあります」</p></div>
+      <div class="card"><h3>③ 乾燥肌・肉球の保湿ケア</h3>
+        <p>カサカサ肌、フケ、肉球のひび割れへの保湿として。</p>
+        <p class="voice">「3回程度の使用で粉吹きが減少した例や、浸透性が高く『肉球に塗っても滑りにくい』点が評価されています。冬場の乾燥だけでなく、シャンプー後の保湿剤としても定着しています」</p></div>
+      <div class="card"><h3>④ 肛門腺絞り・処置後の消臭とケア</h3>
+        <p>院内処置後の匂い消しと二次感染予防として。</p>
+        <p class="voice">「肛門腺絞り後の独特な匂いが和らぐため、ルーチンとして採用する病院が多いです。スタッフが消臭効果を実感しやすく、そこからオーナーへの推奨につながる成功パターンが多く見られます」</p></div>
+      <div class="card"><h3>⑤ 膿皮症・猫のアゴニキビ対策</h3>
+        <p>再発性膿皮症の維持管理、頑固なアゴニキビの洗浄として。</p>
+        <p class="voice">「抗生剤への耐性が懸念される症例や、薬を好まないオーナーへの提案として有効です。コンベニア等で治らなかった猫のアゴニキビがきれいになった事例も報告されています」</p></div>
+      <div class="card"><h3>特筆すべき症例</h3>
+        <ul>
+          <li>巨大な褥瘡：10cmほどあった大型犬の褥瘡が、3週間で2cmまで縮小</li>
+          <li>難治性の創傷：首元の傷が塞がっては広がる猫。併用で過去最高に傷が小さくなった</li>
+          <li>発毛：舐め壊しでツルツルになっていた部位に塗布し、数日で毛が生えてきた報告が複数</li>
+          <li>その他：ウサギの後足不随による尿汚れ・皮膚荒れ、未去勢の雄猫の粗相後の消臭</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="split" style="margin-top:6px">
+      <div>
+        <h3>切り替えのポイント</h3>
+        <ul>
+          <li><b>ステロイド外用剤からの移行</b>：アルコールフリーのため、傷口や荒れた皮膚にも「しみない」のが強み。ステロイドによる皮膚の菲薄化を避けたい維持期に</li>
+          <li><b>他の保湿製品との差別化</b>：保湿だけでなく、抗菌・抗真菌・抗炎症も同時に。単なる保湿スプレーではなく「1本で合理的」と案内できる</li>
+        </ul>
+      </div>
+      <div>
+        <h3>現場での伝え方</h3>
+        <ul>
+          <li>研究の背景（帝京大学医真菌研究センター、東京科学大学 呼吸器内科）と、人の介護現場での使用実績を伝える</li>
+          <li>先生や看護師さんの手に直接スプレーし、ベタつきのなさ・肌馴染み・香りを体感してもらう</li>
+          <li>顔のシワ（パグ・フレンチブルドッグ等）の汚れ・匂い・ただれは、具体的な使用シーンとして伝わりやすい</li>
+          <li>「舐めても安心」「毎日使える」は安全性の文脈で伝える（効果の断定はしない）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Section9 FAQ ============ -->
+<section id="s9">
+  <div class="wrap">
+    <span class="sec-no">SECTION 9</span>
+    <h2>先生からよくある質問と回答</h2>
+    <p class="desc">商談前・商談中に確認できる営業FAQ</p>
+    <p>商談では、製品の特徴だけでなく、使用方法、対象となる動物、研究データ、安全性などについて質問されることがあります。回答内容を確認し、必要に応じて製品資料・エビデンス・使用方法資料をご案内ください。</p>
+    <div id="s9-list"></div>
+    <div class="foot"><b>回答に迷ったときは、推測で回答しない。</b>製品仕様は正式な製品資料を、研究・論文はSection7の原著・関連資料を、使用対象・使用頻度・併用は正式な使用方法と注意事項を確認してください。確認できない内容は、その場で断定せず、製品担当者に確認します。</div>
+  </div>
+</section>
+
+<!-- ============ 関連資料 ============ -->
+<section id="dl">
+  <div class="wrap">
+    <span class="sec-no">DOWNLOAD</span>
+    <h2>関連資料・営業支援資料</h2>
+    <p class="desc">必要な情報を、すぐに確認できる。</p>
+    <p>営業活動に必要な資料をまとめています。PDFはこのページ（限定URL）内でのみ配布してください。</p>
+    <div id="dl-list"></div>
+    <p class="cap">「ご提供待ち」の資料は、ご提供いただき次第この一覧に追加します（追加はスプレッドシートの行追加と同じ扱いです）。</p>
+  </div>
+</section>
+
+<footer>
+  和興フィルタテクノロジー株式会社　リゾペール 営業支援サイト（デモ版）<br>
+  限定URL・検索エンジン非掲載での公開を想定しています<br>
+  <span style="font-size:10.5px">※本デモの写真はイメージです（製品写真は実物、使用シーンはAI生成）。公開時は実際の使用写真・症例写真に差し替えます。</span>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
