@@ -79,7 +79,7 @@ const S6 = [
     id: 'S6-011', kind: '症状・診療テーマ', name: '猫の顎周辺の皮膚トラブル',
     point: '猫の顎周辺の汚れ・皮膚トラブル。',
     view: '聞き取りの使用経験として紹介し、猫への使用方法・注意事項を確認する。',
-    tags: ['汚れ', '黒ずみ', '繰り返す'], scene: ['局所ケア'], ev: ['EV-004'], order: 110, pub: '公開'
+    tags: ['汚れ', '黒ずみ', '赤み', '繰り返す'], scene: ['局所ケア'], ev: ['EV-009', 'EV-001'], order: 110, pub: '公開'
   }
 ];
 
@@ -166,7 +166,8 @@ const DOCS = [
   { id:'D-05', cat:'根拠を確認する', name:'症例報告｜リゾックス含有スプレーを使用して改善したマラセチア皮膚炎の1例', desc:'マラセチア皮膚炎の症例におけるスプレーの使用経過と併用治療の報告。', file:'assets/docs/case_malassezia.pdf', size:'0.4MB', note:'', pub:'公開' },
   { id:'D-15', cat:'根拠を確認する', name:'特許証｜抗真菌活性を有する組成物（特許第6842088号）', desc:'日本国内の特許証', file:'assets/docs/patent_jp_cert.pdf', size:'0.2MB', btn:'特許証を見る', note:'', pub:'公開' },
   { id:'D-16', cat:'根拠を確認する', name:'特許証｜米国特許第10,729,779号', desc:'米国の特許証', file:'assets/docs/patent_us_cert.pdf', size:'0.2MB', btn:'特許証を見る', note:'', pub:'公開' },
-  { id:'D-06', cat:'根拠を確認する', name:'獣医師コメント集（現場から寄せられた使用経験（エビデンスとは区別））', desc:'獣医師・動物病院の使用経験を、疾患／使用目的／併用治療／観察結果別に整理した資料', file:'assets/docs/comments.pdf', size:'1.7MB', note:'', pub:'公開' },
+  { id:'D-06', cat:'根拠を確認する', name:'現場からの評価ポイント（要約・2ページ）', desc:'コメントを疾患×使用場面×評価内容で整理。提案の会話で使う要約版', file:'assets/docs/genba_eval.pdf', size:'0.1MB', note:'', pub:'公開' },
+  { id:'D-06b', cat:'根拠を確認する', name:'獣医師コメント集（原文・全12ページ）', desc:'獣医師・動物病院の使用経験を、疾患／使用目的／併用治療／観察結果別に整理した資料', file:'assets/docs/comments.pdf', size:'1.7MB', note:'', pub:'公開' },
 
   { id:'D-07', cat:'使い方を確認する', name:'使用方法・使用上の注意（このページ）', desc:'スプレーの使用手順、使用量・頻度、顔周りの使用、耳内不可などの注意事項。', href:'#s2', note:'ページ内', pub:'公開' },
 
