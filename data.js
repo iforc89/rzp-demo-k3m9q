@@ -166,7 +166,8 @@ const DOCS = [
   { id:'D-15', cat:'根拠を確認する', name:'特許証｜抗真菌活性を有する組成物（特許第6842088号）', desc:'日本国内の特許証', file:'assets/docs/patent_jp_cert.pdf', size:'0.2MB', btn:'特許証を見る', note:'', pub:'公開' },
   { id:'D-16', cat:'根拠を確認する', name:'特許証｜米国特許第10,729,779号', desc:'米国の特許証', file:'assets/docs/patent_us_cert.pdf', size:'0.2MB', btn:'特許証を見る', note:'', pub:'公開' },
   { id:'D-06', cat:'根拠を確認する', name:'現場からの評価ポイント（要約・2ページ）', desc:'コメントを疾患×使用場面×評価内容で整理。提案の会話で使う要約版', file:'assets/docs/genba_eval.pdf', size:'0.1MB', note:'', pub:'公開' },
-  { id:'D-06b', cat:'根拠を確認する', name:'獣医師コメント集（原文・全12ページ）', desc:'獣医師・動物病院の使用経験を、疾患／使用目的／併用治療／観察結果別に整理した資料', file:'assets/docs/comments.pdf', size:'1.7MB', note:'', pub:'公開' },
+  { id:'D-06b', cat:'根拠を確認する', name:'獣医師コメント集（原文・PC版／全24ページ）', desc:'症状・疾患別の目次から、該当する現場コメントを開ける構成。PC・印刷向け', file:'assets/docs/comments_pc.pdf', size:'0.8MB', note:'', pub:'公開' },
+  { id:'D-06c', cat:'根拠を確認する', name:'獣医師コメント集（原文・スマホ版／全53ページ）', desc:'スマホで1ページずつ読める縦組み版。商談中に手元で開く用', file:'assets/docs/comments_sp.pdf', size:'0.9MB', note:'', pub:'公開' },
 
   { id:'D-07', cat:'使い方を確認する', name:'使用方法・使用上の注意（このページ）', desc:'スプレーの使用手順、使用量・頻度、顔周りの使用、耳内不可などの注意事項。', href:'#s2', note:'ページ内', pub:'公開' },
 
